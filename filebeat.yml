@@ -1,0 +1,12 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /usr/share/filebeat/logs/*.log
+  processors:
+    - dissect:
+        tokenizer: "/usr/share/filebeat/logs/%{application}.log"
+        field: "log.file.path"
+        target_prefix: ""
+output.elasticsearch:
+  hosts: ["elasticsearch:9200"]
