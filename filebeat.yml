@@ -2,11 +2,16 @@ filebeat.inputs:
 - type: log
   enabled: true
   paths:
-    - /usr/share/filebeat/logs/*.log
-  processors:
-    - dissect:
-        tokenizer: "/usr/share/filebeat/logs/%{application}.log"
-        field: "log.file.path"
-        target_prefix: ""
+    - /usr/share/filebeat/logs/brazil.log
+  fields:
+    application: brazil
+  fields_under_root: true
+- type: log
+  enabled: true
+  paths:
+    - /usr/share/filebeat/logs/japan.log
+  fields:
+    application: japan
+  fields_under_root: true
 output.elasticsearch:
   hosts: ["elasticsearch:9200"]
